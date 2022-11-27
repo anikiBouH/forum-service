@@ -10,8 +10,8 @@ import org.springframework.data.repository.CrudRepository;
 import telran.java45.post.model.Post;
 
 public interface ForumRepository extends CrudRepository<Post, String> {
-
-	Stream<Post> findPostByAuthorIgnoreCase(String author);
+	
+	Stream<Post> findPostByAuthor(String author);
 
 	Stream<Post> findPostByDateCreatedBetween(LocalDateTime dateFrom, LocalDateTime dateTo);
 

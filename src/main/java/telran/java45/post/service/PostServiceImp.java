@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import telran.java45.post.dao.ForumRepository;
-import telran.java45.post.dto.CommentDto;
+import telran.java45.post.dto.CommentCreateDto;
 import telran.java45.post.dto.PeriodDto;
 import telran.java45.post.dto.PostCreateDto;
 import telran.java45.post.dto.PostDto;
@@ -52,7 +52,7 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
-	public PostDto addComment(String id, String author, CommentDto commentDto) {
+	public PostDto addComment(String id, String author, CommentCreateDto commentDto) {
 		Post post = forumRepository.findById(id).orElseThrow(() -> new PostNotFoundExeption());
 		Comment comment = Comment.builder().user(author).message(commentDto.getMessage())
 				.dateCreated(LocalDateTime.now()).likes(0).build();
@@ -96,7 +96,7 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public List<PostDto> findPostsByAuthor(String author) {
-		List<PostDto> postsByAuthor = forumRepository.findPostByAuthorIgnoreCase(author)
+		List<PostDto> postsByAuthor = forumRepository.findPostByAuthor(author)
 				.map(post -> modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
 		return postsByAuthor;
 	}

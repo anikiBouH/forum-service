@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import lombok.RequiredArgsConstructor;
-import telran.java45.post.dto.CommentDto;
+import telran.java45.post.dto.CommentCreateDto;
 import telran.java45.post.dto.PeriodDto;
 import telran.java45.post.dto.PostCreateDto;
 import telran.java45.post.dto.PostDto;
@@ -26,8 +26,6 @@ public class PostController {
 		
 		@PostMapping("/forum/post/{author}")
 		public PostDto addPost(@PathVariable String author, @RequestBody PostCreateDto postCreateDto) {
-			PostDto postDto = postService.addPost(author, postCreateDto);
-			System.out.println(postDto);
 			return postService.addPost(author, postCreateDto);
 		}
 		
@@ -47,7 +45,7 @@ public class PostController {
 		}
 		
 		@PutMapping("/forum/post/{id}/comment/{author}")
-		public PostDto addComment(@PathVariable String id,@PathVariable String author, @RequestBody CommentDto commentDto) {
+		public PostDto addComment(@PathVariable String id,@PathVariable String author, @RequestBody CommentCreateDto commentDto) {
 			return postService.addComment(id, author, commentDto);
 	
 		}

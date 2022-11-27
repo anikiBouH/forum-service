@@ -3,9 +3,14 @@ package telran.java45.post.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
-import telran.java45.post.model.Comment;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 @ToString
 public class PostDto {
 	String id;
@@ -15,6 +20,6 @@ public class PostDto {
     LocalDateTime dateCreated;
     List<String> tags;
     int likes;
-    List<Comment> comments;
+    List<CommentDto> comments;
     
 }
