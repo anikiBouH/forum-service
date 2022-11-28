@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -96,15 +97,19 @@ public class PostServiceImp implements PostService {
 
 	@Override
 	public List<PostDto> findPostsByAuthor(String author) {
-		List<PostDto> postsByAuthor = forumRepository.findPostByAuthor(author)
+		List<PostDto> postsByAuthor = forumRepository.findPostByAuthorIgnoreCase(author)
 				.map(post -> modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
 		return postsByAuthor;
 	}
 	
 	@Override
 	public List<PostDto> findPostByTags(List<String> tags) {
-		// TODO Auto-generated method stub
-		return null;
+		return tags.stream()
+				.map(t->forumRepository.findPostByTagsIgnoreCase(t))
+				.flatMap(Function.identity())
+				.distinct()
+				.map(post -> modelMapper.map(post, PostDto.class))
+				.collect(Collectors.toList());
 	}
 
 
