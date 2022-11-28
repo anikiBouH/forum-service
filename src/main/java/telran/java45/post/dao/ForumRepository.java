@@ -1,6 +1,7 @@
 package telran.java45.post.dao;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.springframework.data.mongodb.repository.Query;
@@ -14,5 +15,5 @@ public interface ForumRepository extends CrudRepository<Post, String> {
 
 	Stream<Post> findPostByDateCreatedBetween(LocalDateTime dateFrom, LocalDateTime dateTo);
 
-	Stream<Post> findPostByTagsIgnoreCase(String tags);
+	Stream<Post> findPostByTagsInIgnoreCase(List<String> tags);
 }

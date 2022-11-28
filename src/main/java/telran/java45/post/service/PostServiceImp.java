@@ -104,10 +104,7 @@ public class PostServiceImp implements PostService {
 	
 	@Override
 	public List<PostDto> findPostByTags(List<String> tags) {
-		return tags.stream()
-				.map(t->forumRepository.findPostByTagsIgnoreCase(t))
-				.flatMap(Function.identity())
-				.distinct()
+		return forumRepository.findPostByTagsInIgnoreCase(tags)
 				.map(post -> modelMapper.map(post, PostDto.class))
 				.collect(Collectors.toList());
 	}
