@@ -13,16 +13,22 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
 @ToString
 @EqualsAndHashCode(of = "id")
 public class Post {
 	String id;
-    String title;
-    String content;
-    String author;
-    LocalDateTime dateCreated;
-    List<String> tags;
-    int likes;
-    List<Comment> comments;
+	@Setter
+	String title;
+	@Setter
+	String content;
+	@Setter
+	String author;
+	@Setter
+	LocalDateTime dateCreated;
+	@Setter
+	List<String> tags;
+	@Setter
+	int likes;
+	@Setter
+	List<Comment> comments;
 }
